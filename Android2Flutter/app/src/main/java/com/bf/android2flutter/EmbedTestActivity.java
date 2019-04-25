@@ -11,8 +11,6 @@ import io.flutter.facade.Flutter;
 
 public class EmbedTestActivity extends AppCompatActivity {
 
-    private static final String CHANNEL = "com.example.2flutter/comtest";
-
     View flutterView;
     Button btn1;
 
@@ -30,6 +28,12 @@ public class EmbedTestActivity extends AppCompatActivity {
                 createFlutterView();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        //flutterView = null;
+        super.onDestroy();
     }
 
     private void createFlutterView(){

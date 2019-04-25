@@ -1,6 +1,7 @@
 package com.bf.android2flutter;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import io.flutter.app.FlutterActivity;
 //import io.flutter.embedding.android.FlutterActivity;
@@ -23,6 +24,19 @@ public class MyFlutterActivity extends FlutterActivity {
         Flutter.startInitialization(mainApp);
 
         super.onCreate(savedInstanceState);
+
+//        GeneratedPluginRegistrant.registerWith(this);
+
+        FlutterView.FirstFrameListener mListener = new FlutterView.FirstFrameListener() {
+            @Override
+            public void onFirstFrame() {
+                Log.d("MyFlutterActivity", "onFirstFrame triggered");
+                //getFlutterView().pushRoute("/route2");
+                getFlutterView().setInitialRoute("/route2");
+            }
+        };
+
+        getFlutterView().addFirstFrameListener(mListener);
 
         GeneratedPluginRegistrant.registerWith(this);
 

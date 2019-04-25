@@ -13,9 +13,12 @@ Widget _widgetForRoute(String theRoute) {
 }
 
 Widget _buildEmbeddedPage(String myRoute){
+  print('_buildEmbeddedPage route:[$myRoute]');
   switch (myRoute) {
     case 'route1':
-      return MyFlutterPage(title: 'Ola from Flutter');
+      return MyFlutterPage1(title: 'Ola from Flutter 1');
+    case 'route2':
+      return MyFlutterPage2(title: 'Ola from Flutter 2');
     default:
       return DefaultPage();
   }
@@ -68,6 +71,11 @@ class _DefaultPageState extends State<DefaultPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Text(
+                'Default Route',
+                style: TextStyle(color: Colors.white),
+              ),
+              Container(height: 10),
               RawMaterialButton(
                 padding: EdgeInsets.all(16.0),
                 fillColor: Colors.red,
@@ -109,16 +117,16 @@ class _DefaultPageState extends State<DefaultPage> {
 
 }
 
-class MyFlutterPage extends StatefulWidget {
-  MyFlutterPage({Key key, this.title}) : super(key: key);
+class MyFlutterPage1 extends StatefulWidget {
+  MyFlutterPage1({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyFlutterPageState createState() => _MyFlutterPageState();
+  _MyFlutterPage1State createState() => _MyFlutterPage1State();
 }
 
-class _MyFlutterPageState extends State<MyFlutterPage> {
+class _MyFlutterPage1State extends State<MyFlutterPage1> {
 
 
   int _counter = 0;
@@ -175,3 +183,104 @@ class _MyFlutterPageState extends State<MyFlutterPage> {
 
 
 }
+
+class MyFlutterPage2 extends StatefulWidget {
+  MyFlutterPage2({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyFlutterPage2State createState() => _MyFlutterPage2State();
+}
+
+class _MyFlutterPage2State extends State<MyFlutterPage2> {
+
+  static const String _channel = 'com.example.2flutter/comtestevent';
+  static const BasicMessageChannel<String> platform = BasicMessageChannel<String>(_channel, StringCodec());
+
+  String _nativeMessage = 'Empty Message';
+
+  @override
+  void initState() {
+    super.initState();
+    platform.setMessageHandler(_handlePlatformMessage);
+    // note see https://medium.com/grandcentrix/use-flutter-in-existing-android-apps-ac07e2072781 for example of List passing
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildMessageView();
+  }
+
+  Widget _buildMessageView(){
+    return Scaffold(
+//      appBar: AppBar(
+//        title: Text(widget.title),
+//      ),
+      body: Container(
+        color: Colors.blue.shade800,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                widget.title,
+                style: TextStyle(color: Colors.white),
+              ),
+              Container(height: 10),
+              RawMaterialButton(
+                padding: EdgeInsets.all(16.0),
+                fillColor: Colors.red,
+                child: Text('Send message to native', style: TextStyle(color: Colors.white),),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                onPressed: () {
+                  _sendMessageToNative('Ola from Flutter');
+                },
+              ),
+              Container(height: 15,),
+              Text(
+                'Msg: [$_nativeMessage]',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+  void _sendMessageToNative(String msg){
+    platform.send(msg);
+  }
+
+//  Future<void> _getNativeMessage() async {
+//    String nativeMessage;
+//    try {
+//      final String result = await platform.invokeMethod('getNativeMessage');
+//      nativeMessage = result;
+//    } on PlatformException catch (e) {
+//      nativeMessage = "Failed to get native message: '${e.message}'.";
+//    }
+//
+//    setState(() {
+//      _nativeMessage = nativeMessage;
+//    });
+//  }
+
+
+  Future<String> _handlePlatformMessage(String message) async{
+    print('_handlePlatformMessage msg=['+message!=null?message:'Nada'+']');
+    if (message != null) {
+      setState(() {
+        _nativeMessage = message;
+      });
+    }
+  }
+}
+
+
