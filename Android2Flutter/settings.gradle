@@ -1,0 +1,7 @@
+include ':app'
+//ignore the Binding error - it comes from package groovy.lang, which does NOT need importing
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir.parentFile,
+        'flutterembed/.android/include_flutter.groovy'
+))
