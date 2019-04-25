@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-
-import io.flutter.facade.Flutter;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btnEmbed;
+    Button btnFlutterActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +22,27 @@ public class MainActivity extends AppCompatActivity {
         btnEmbed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showFlutterEmbedded();
+            }
+        });
+
+        btnFlutterActivity = findViewById(R.id.button_launchfa);
+        btnFlutterActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 showFlutterActivity();
             }
         });
+
+    }
+
+    private void showFlutterEmbedded(){
+        Intent intent = new Intent(this, EmbedTestActivity.class);
+        startActivity(intent);
     }
 
     private void showFlutterActivity(){
-        Intent intent = new Intent(this, EmbedTestActivity.class);
+        Intent intent = new Intent(this, MyFlutterActivity.class);
         startActivity(intent);
     }
 
