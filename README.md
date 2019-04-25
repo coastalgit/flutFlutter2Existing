@@ -1,5 +1,4 @@
-# flutFlutter2Existing
-Embedding Flutter into existing native mobile applications
+# Embedding Flutter into existing native mobile applications
 
 Based on content at https://github.com/flutter/flutter/wiki/Add-Flutter-to-existing-apps
 
