@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 //void main() => runApp(_widgetForRoute(window.defaultRouteName, title));
 void main() => runApp(_widgetForRoute(window.defaultRouteName));
@@ -49,6 +50,8 @@ class MyFlutterPage extends StatefulWidget {
 }
 
 class _MyFlutterPageState extends State<MyFlutterPage> {
+
+  static const platform = const MethodChannel('com.example.2flutter/comtest');
   int _counter = 0;
 
   void _incrementCounter() {
@@ -57,8 +60,29 @@ class _MyFlutterPageState extends State<MyFlutterPage> {
     });
   }
 
+  String _nativeMessage = 'Not available';
+
+  Future<void> _getNativeMessage() async {
+    String nativeMessage;
+    try {
+      final String result = await platform.invokeMethod('getNativeMessage');
+      nativeMessage = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      nativeMessage = "Failed to get native message: '${e.message}'.";
+    }
+
+    setState(() {
+      _nativeMessage = nativeMessage;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    return _buildCounterView();
+    //return _buildMessageView();
+  }
+
+  Widget _buildCounterView(){
     return Scaffold(
 //      appBar: AppBar(
 //        title: Text(widget.title),
@@ -94,4 +118,49 @@ class _MyFlutterPageState extends State<MyFlutterPage> {
       ),
     );
   }
+
+  Widget _buildMessageView(){
+    return Scaffold(
+//      appBar: AppBar(
+//        title: Text(widget.title),
+//      ),
+      body: Container(
+        color: Colors.blue.shade800,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                widget.title,
+                style: TextStyle(color: Colors.white),
+              ),
+              Container(height: 10),
+              RawMaterialButton(
+                padding: EdgeInsets.only(top:16.0, bottom: 16.0),
+                fillColor: Colors.red,
+                child: Text('Get native message', style: TextStyle(color: Colors.white),),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                onPressed: () {
+                  _getNativeMessage();
+                },
+              ),
+              Text(
+                'Msg: [$_nativeMessage]',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+
 }
