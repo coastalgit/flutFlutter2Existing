@@ -16,6 +16,7 @@ public class MyFlutterActivity extends FlutterActivity {
     private static final String CHANNEL = "com.example.2flutter/comtest";
 
     MainApp mainApp;
+    MethodChannel methodChannel;
     //FlutterView flutterView;
 
     @Override
@@ -40,7 +41,8 @@ public class MyFlutterActivity extends FlutterActivity {
 
         GeneratedPluginRegistrant.registerWith(this);
 
-        new MethodChannel(getFlutterView(), CHANNEL).setMethodCallHandler(
+        methodChannel = new MethodChannel(getFlutterView(), CHANNEL);
+        methodChannel.setMethodCallHandler(
                 new MethodChannel.MethodCallHandler() {
                     @Override
                     public void onMethodCall(MethodCall call, MethodChannel.Result result) {

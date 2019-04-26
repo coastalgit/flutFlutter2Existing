@@ -22,13 +22,14 @@ public class EmbedTest2Activity extends AppCompatActivity {
 
     FlutterView flutterView;
     Button btn1, btn2;
+    FrameLayout frameFlutter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_embed_test2);
 
-        //GeneratedPluginRegistrant.registerWith(this);
+        frameFlutter = findViewById(R.id.frame_flutter);
 
         btn1 = findViewById(R.id.button1);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -38,8 +39,10 @@ public class EmbedTest2Activity extends AppCompatActivity {
             }
         });
 
+        // Using Java 8 so Lambdas are go :)
         btn2 = findViewById(R.id.button2);
         btn2.setOnClickListener(view -> sendMsgToFlutter("Hi from Android Activity"));
+        btn2.setEnabled(false);
 
     }
 
@@ -68,12 +71,16 @@ public class EmbedTest2Activity extends AppCompatActivity {
                 String rcd = "RCD:["+s+"]";
                 Log.d("EmbedTest2Activity", rcd);
                 Toast.makeText(EmbedTest2Activity.this, rcd, Toast.LENGTH_SHORT).show();
-                reply.reply("Thanks from Android");
+                //reply.reply("Thanks from Android");
             });
+        //FrameLayout.LayoutParams frameLayout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        //frameLayout.topMargin = 350;
+        //addContentView(flutterView, frameLayout);
 
-        FrameLayout.LayoutParams frameLayout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        frameLayout.topMargin = 350;
-        addContentView(flutterView, frameLayout);
+        frameFlutter.addView(flutterView);
+
+        btn1.setEnabled(false);
+        btn2.setEnabled(true);
     }
 
 }

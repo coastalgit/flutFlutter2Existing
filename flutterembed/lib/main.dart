@@ -16,9 +16,9 @@ Widget _buildEmbeddedPage(String myRoute){
   print('_buildEmbeddedPage route:[$myRoute]');
   switch (myRoute) {
     case 'route1':
-      return MyFlutterPage1(title: 'Ola from Flutter 1');
+      return MyFlutterPage1(title: 'I am Flutter route 1');
     case 'route2':
-      return MyFlutterPage2(title: 'Ola from Flutter 2');
+      return MyFlutterPage2(title: 'I am Flutter route 2');
     default:
       return DefaultPage();
   }
@@ -231,7 +231,7 @@ class _MyFlutterPage2State extends State<MyFlutterPage2> {
               Container(height: 10),
               RawMaterialButton(
                 padding: EdgeInsets.all(16.0),
-                fillColor: Colors.red,
+                fillColor: Colors.deepOrange,
                 child: Text('Send message to native', style: TextStyle(color: Colors.white),),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0),
