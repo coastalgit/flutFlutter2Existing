@@ -11,7 +11,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 import io.flutter.view.FlutterView;
 
-public class MyFlutterActivity extends FlutterActivity {
+public class MyFlutterActivity1 extends FlutterActivity {
 
     private static final String CHANNEL = "com.example.2flutter/comtest";
 
@@ -31,7 +31,7 @@ public class MyFlutterActivity extends FlutterActivity {
         FlutterView.FirstFrameListener mListener = new FlutterView.FirstFrameListener() {
             @Override
             public void onFirstFrame() {
-                Log.d("MyFlutterActivity", "onFirstFrame triggered");
+                Log.d("MyFlutterActivity1", "onFirstFrame triggered");
                 //getFlutterView().pushRoute("/route2");
                 getFlutterView().setInitialRoute("/route2");
             }

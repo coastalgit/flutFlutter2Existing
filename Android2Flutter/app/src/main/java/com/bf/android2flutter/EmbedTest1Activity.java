@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 
 import io.flutter.facade.Flutter;
 
-public class EmbedTestActivity extends AppCompatActivity {
+public class EmbedTest1Activity extends AppCompatActivity {
 
     View flutterView;
     Button btn1;
@@ -43,7 +43,7 @@ public class EmbedTestActivity extends AppCompatActivity {
         frameLayout.topMargin = 200;
         addContentView(flutterView, frameLayout);
 */
-        flutterView = Flutter.createView(EmbedTestActivity.this, getLifecycle(), "route1");
+        flutterView = Flutter.createView(EmbedTest1Activity.this, getLifecycle(), "route1");
         FrameLayout.LayoutParams frameLayout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         frameLayout.topMargin = 200;
         addContentView(flutterView, frameLayout);
