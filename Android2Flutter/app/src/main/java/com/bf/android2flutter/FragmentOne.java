@@ -13,33 +13,30 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.flutter.plugin.common.MethodChannel;
 
 
-public class FragmentTwo extends Fragment {
+public class FragmentOne extends Fragment {
 
-    public interface OnFragmentTwoInteractionListener{
-        void onFrag2NavAwayClick();
+    public interface OnFragmentOneInteractionListener{
+        void onFrag1NavAwayClick();
     }
 
-    private static final String TAG = FragmentTwo.class.getSimpleName();
+    private static final String TAG = FragmentOne.class.getSimpleName();
     private static final String ARG_PARAM1 = "param1";
-    private static final String CHANNEL = "com.example.2flutter/comtest";
 
     private String mParam1;
-    private MethodChannel methodChannel;
-    private OnFragmentTwoInteractionListener mListener;
+    private OnFragmentOneInteractionListener mListener;
 
-    @BindView(R.id.btn_showfrag1)
-    Button mBtnShowFrag1;
+    @BindView(R.id.btn_showfrag2)
+    Button mBtnShowFrag2;
 
-    public FragmentTwo() {
+    public FragmentOne() {
         // Required empty public constructor
     }
 
-    public static FragmentTwo newInstance(String param1) {
+    public static FragmentOne newInstance(String param1) {
         Log.d(TAG, "newInstance: ");
-        FragmentTwo fragment = new FragmentTwo();
+        FragmentOne fragment = new FragmentOne();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -60,17 +57,17 @@ public class FragmentTwo extends Fragment {
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: ");
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_fragment_two, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_fragment_one, container, false);
         ButterKnife.bind(this, rootView);
         return rootView;
     }
-    
+
     @Override
     public void onAttach(Context context) {
         Log.d(TAG, "onAttach: ");
         super.onAttach(context);
-        if (context instanceof OnFragmentTwoInteractionListener) {
-            mListener = (OnFragmentTwoInteractionListener) context;
+        if (context instanceof OnFragmentOneInteractionListener) {
+            mListener = (OnFragmentOneInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -84,14 +81,14 @@ public class FragmentTwo extends Fragment {
         mListener = null;
     }
 
-    @OnClick(R.id.btn_showfrag1)
-    public void btnShowFrag1_onClick(Button btn){
-        showFrag1();
+    @OnClick(R.id.btn_showfrag2)
+    public void btnShowFrag2_onClick(Button btn){
+        showFrag2();
     }
 
-    private void showFrag1() {
+    private void showFrag2() {
         if (mListener != null) {
-            mListener.onFrag2NavAwayClick();
+            mListener.onFrag1NavAwayClick();
         }
     }
 

@@ -17,7 +17,6 @@ public class MyFlutterActivity1 extends FlutterActivity {
 
     MainApp mainApp;
     MethodChannel methodChannel;
-    //FlutterView flutterView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,8 +24,6 @@ public class MyFlutterActivity1 extends FlutterActivity {
         Flutter.startInitialization(mainApp);
 
         super.onCreate(savedInstanceState);
-
-//        GeneratedPluginRegistrant.registerWith(this);
 
         FlutterView.FirstFrameListener mListener = new FlutterView.FirstFrameListener() {
             @Override
@@ -37,7 +34,7 @@ public class MyFlutterActivity1 extends FlutterActivity {
             }
         };
 
-        getFlutterView().addFirstFrameListener(mListener);
+        //getFlutterView().addFirstFrameListener(mListener);
 
         GeneratedPluginRegistrant.registerWith(this);
 

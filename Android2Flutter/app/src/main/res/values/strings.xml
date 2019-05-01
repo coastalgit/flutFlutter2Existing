@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Android2Flutter</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="greeting_fragment1">I am frag 1</string>
+    <string name="greeting_fragment2">I am frag 2</string>
+    <string name="show_frag_1">SHOW FRAG ONE</string>
+    <string name="show_frag_2">SHOW FRAG TWO</string>
 </resources>

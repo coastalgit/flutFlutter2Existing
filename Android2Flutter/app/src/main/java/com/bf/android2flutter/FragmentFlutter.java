@@ -1,8 +1,8 @@
 package com.bf.android2flutter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,33 +13,30 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.flutter.plugin.common.MethodChannel;
+import io.flutter.facade.FlutterFragment;
+import io.flutter.view.FlutterView;
 
 
-public class FragmentTwo extends Fragment {
+public class FragmentFlutter extends FlutterFragment {
 
-    public interface OnFragmentTwoInteractionListener{
-        void onFrag2NavAwayClick();
+    public interface OnFragmentFlutterInteractionListener{
+        void onFragFlutterNavAwayClick();
     }
 
-    private static final String TAG = FragmentTwo.class.getSimpleName();
+    private static final String TAG = FragmentFlutter.class.getSimpleName();
     private static final String ARG_PARAM1 = "param1";
-    private static final String CHANNEL = "com.example.2flutter/comtest";
 
     private String mParam1;
-    private MethodChannel methodChannel;
-    private OnFragmentTwoInteractionListener mListener;
 
-    @BindView(R.id.btn_showfrag1)
-    Button mBtnShowFrag1;
+    private OnFragmentFlutterInteractionListener mListener;
 
-    public FragmentTwo() {
+    public FragmentFlutter() {
         // Required empty public constructor
     }
 
-    public static FragmentTwo newInstance(String param1) {
+    public static FragmentFlutter newInstance(String param1) {
         Log.d(TAG, "newInstance: ");
-        FragmentTwo fragment = new FragmentTwo();
+        FragmentFlutter fragment = new FragmentFlutter();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -56,21 +53,19 @@ public class FragmentTwo extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public FlutterView onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: ");
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_fragment_two, container, false);
-        ButterKnife.bind(this, rootView);
+        //return super.onCreateView(inflater, container, savedInstanceState);
+        FlutterView rootView = super.onCreateView(inflater, container, savedInstanceState);
         return rootView;
     }
-    
+
     @Override
     public void onAttach(Context context) {
         Log.d(TAG, "onAttach: ");
         super.onAttach(context);
-        if (context instanceof OnFragmentTwoInteractionListener) {
-            mListener = (OnFragmentTwoInteractionListener) context;
+        if (context instanceof OnFragmentFlutterInteractionListener) {
+            mListener = (OnFragmentFlutterInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -84,14 +79,9 @@ public class FragmentTwo extends Fragment {
         mListener = null;
     }
 
-    @OnClick(R.id.btn_showfrag1)
-    public void btnShowFrag1_onClick(Button btn){
-        showFrag1();
-    }
-
     private void showFrag1() {
         if (mListener != null) {
-            mListener.onFrag2NavAwayClick();
+            mListener.onFragFlutterNavAwayClick();
         }
     }
 

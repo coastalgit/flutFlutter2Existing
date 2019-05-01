@@ -15,6 +15,10 @@ import io.flutter.plugin.common.StringCodec;
 //import io.flutter.embedding.android.FlutterView;
 import io.flutter.view.FlutterView;
 
+/*
+* This example uses a BasicMessageChannel to send string (to Flutter view) and process a received string (from a Flutter view)
+*/
+
 public class EmbedTest2Activity extends AppCompatActivity {
 
     private static final String CHANNEL = "com.example.2flutter/comtestevent";

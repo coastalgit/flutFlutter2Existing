@@ -9,7 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button btnEmbed, btnEmbed2;
-    Button btnFlutterActivity;
+    Button btnFlutterActivity1, btnFlutterFrag1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +34,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnFlutterActivity = findViewById(R.id.button_launchfa);
-        btnFlutterActivity.setOnClickListener(new View.OnClickListener() {
+        btnFlutterActivity1 = findViewById(R.id.button_launchfa1);
+        btnFlutterActivity1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFlutterActivity();
+                showFlutterActivity1();
+            }
+        });
+
+        btnFlutterFrag1 = findViewById(R.id.button_launchfrag1);
+        btnFlutterFrag1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showFlutterFrag1();
             }
         });
 
     }
 
     private void showFlutterEmbedded(){
-        Intent intent = new Intent(this, EmbedTestActivity.class);
+        Intent intent = new Intent(this, EmbedTest1Activity.class);
         startActivity(intent);
     }
 
@@ -54,9 +62,24 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void showFlutterActivity(){
-        Intent intent = new Intent(this, MyFlutterActivity.class);
+    private void showFlutterActivity1(){
+        Intent intent = new Intent(this, MyFlutterActivity1.class);
         startActivity(intent);
+    }
+
+/*
+    private void showFlutterFrag1(){
+//        Intent intent = new Intent(this, MyFlutterFrag1.class);
+//        startActivity(intent);
+        Intent flutterIntent = new MyFlutterFrag1.IntentBuilder().initialRoute("route3").build(MainActivity.this);
+        startActivity(flutterIntent);
+    }
+*/
+
+    private void showFlutterFrag1(){
+        Intent recipeIntent = new Intent(this, MainFragActivity.class);
+        //recipeIntent.putExtra(RecipeActivity.KEY_RECIPE, recipe);
+        startActivity(recipeIntent);
     }
 
 }

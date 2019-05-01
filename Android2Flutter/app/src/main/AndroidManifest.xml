@@ -10,20 +10,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EmbedTestActivity"></activity>
-        <activity android:name=".EmbedTest2Activity"></activity>
+        <activity android:name=".MainFragActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bf.android2flutter.MainFragActivity" />
+        </activity>
+        <activity android:name=".EmbedTest1Activity" />
+        <activity android:name=".EmbedTest2Activity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MyFlutterActivity"
-            android:launchMode="singleTop"
+            android:name=".MyFlutterActivity1"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale"
             android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
+                android:value="true" />
+        </activity>
+        <activity
+            android:name=".MyFlutterFrag1"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
