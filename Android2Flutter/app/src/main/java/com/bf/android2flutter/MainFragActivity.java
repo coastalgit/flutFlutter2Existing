@@ -25,7 +25,7 @@ public class MainFragActivity extends AppCompatActivity implements FragmentOne.O
     private FragmentManager mFragmentManager;
     private Fragment mFragmentOne;
     //private Fragment mFragmentTwo;
-    private FlutterFragment mFragmentTwo;
+    private FragmentFlutter mFragmentTwo;
 
     private  ViewModelMainFrag mViewModel;
 
@@ -58,7 +58,7 @@ public class MainFragActivity extends AppCompatActivity implements FragmentOne.O
             Log.d(TAG, "onCreate: HAVE INSTANCE");
             mFragmentOne = mFragmentManager.getFragment(savedInstanceState, FRAGMENT_ONE);
             //mFragmentTwo = mFragmentManager.getFragment(savedInstanceState, FRAGMENT_TWO);
-            mFragmentTwo = (FlutterFragment) mFragmentManager.getFragment(savedInstanceState, FRAGMENT_TWO);
+            mFragmentTwo = (FragmentFlutter) mFragmentManager.getFragment(savedInstanceState, FRAGMENT_TWO);
         }
 
     }
