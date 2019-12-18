@@ -24,7 +24,6 @@ public class FlutterCachedEngine{
             FlutterMain.startInitialization(appContext);
             //FlutterMain.ensureInitializationComplete(appContext, arra);
             instance = new FlutterEngine(appContext);
-
         }
     }
 
